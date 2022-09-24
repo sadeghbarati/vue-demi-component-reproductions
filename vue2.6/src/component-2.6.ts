@@ -25,7 +25,7 @@ export default defineComponent({
       target
     }
     // return (() => {
-    //   return h('div', { ref: 'target' }, slots.default && slots.default())
+    //   return h('div', { ref: 'target' }, slots.default)
     // })
   },
   render() {
