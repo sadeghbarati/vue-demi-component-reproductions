@@ -15,37 +15,3 @@ Assume that package uses CustomEvents
 `src/component-2.7.ts`
 
 `src/component-3.2.ts`
-
----
-
-I think `isVue2` or `isVue3` is good handle this kinda Vue API because there will be no type error if you change Vue entry with vue-demi
-
-```ts
-const modelValueProp = isVue3 ? 'modelValue' : 'value'
-const updateModelValue = isVue3 ? 'update:modelValue' : 'input'
-```
-
-If I use `isVue` for `$this.listener` or `listener` or `useListener`,
-
-`listener` and `useListener` is only available in `2.7` so type error will show up when switch entry with `vue-demi`
-```ts
-import { defineComponent, h ref, isVue3 } from 'vue-demi'
-defineComponent({
-  name: 'WrapperComponent',
-  setup(props, { attrs, slots, listeners }) {
-    const target = ref<HTMLElement | null>(null)
-
-    return (() => {
-      if(isVue3) {
-        return h('div', { ref: target, attrs }, slots.default && slots.default())
-      } else {
-        return h('div', { ref: target, on: listeners, attrs }, slots.default && slots.default())
-      }
-    })
-  },
-})
-```
-
-
-
-
